@@ -1,0 +1,37 @@
+plugins {
+    id 'java-library'
+    id 'war'
+}
+
+apply from: 'https://raw.github.com/gretty-gradle-plugin/gretty/master/pluginScripts/gretty.plugin'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
+
+    implementation 'org.postgresql:postgresql:42.2.19.jre7'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
+
+    implementation 'org.json:json:20210307'
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+gretty {
+    httpPort = 8181
+    contextPath = '/main'
+}
